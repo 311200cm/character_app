@@ -5,14 +5,14 @@ class ApiServices{
   late Dio dio;
   ApiServices(){
    BaseOptions baseOptions= BaseOptions(
-      baseUrl: BaseUrl,
+      baseUrl: baseUrl,
       connectTimeout: Duration(days: 0,hours: 0,seconds: 30),
       receiveTimeout:Duration(days: 0,hours: 0,seconds: 30),
       receiveDataWhenStatusError: true
     );
     dio=Dio(baseOptions);
   }
-  Future<Map<String,dynamic>> GetAllCharacters ()async{
+  Future<Map<String,dynamic>> getAllCharacters ()async{
     try{
       Response response= await dio.get("character");
       if(response.statusCode==200){

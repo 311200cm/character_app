@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:omar_ahmed_flutter/App_router.dart';
+import 'package:omar_ahmed_flutter/app_router.dart';
 
 import 'constants/strings.dart';
 
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
      debugShowCheckedModeBanner: false,
      onGenerateRoute: appRouter.generateRoute,
-      initialRoute: CharacterScreenRoute,
+      initialRoute: characterScreenRoute,
       /*
       * انا هنا مش بنادى الداله انا بعرف material انى عملت داله اسمها generateRoute
       * استخدمها لما تحتاجها يعنى هو اللى هيناديها

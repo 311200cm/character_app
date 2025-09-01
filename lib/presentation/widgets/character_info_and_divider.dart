@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:omar_ahmed_flutter/Data/Models/Characters_Model.dart';
+
 import 'package:omar_ahmed_flutter/constants/colors.dart';
+
+import '../../data/models/characters_model.dart';
 
 class CharacterInfoAndDivider extends StatelessWidget {
   Results character;
-  String Key;
+  String keyItem;
   double endInet;
   String value;
    CharacterInfoAndDivider({super.key,required this.character,
-     required this.Key,
+     required this.keyItem,
    required this.endInet,
      required this.value
    });
@@ -23,18 +25,18 @@ class CharacterInfoAndDivider extends StatelessWidget {
             text:TextSpan(
               children: [
                 TextSpan(
-                  text: "$Key : ",
+                  text: "$keyItem : ",
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: AppColors.MyWhite
+                    color: AppColors.myWhite
                   ),
                 ),
                 TextSpan(
                   text: value,
                   style: TextStyle(
                       fontSize: 16,
-                      color: AppColors.MyWhite
+                      color: AppColors.myWhite
                   ),
                 ),
               ]
@@ -43,7 +45,7 @@ class CharacterInfoAndDivider extends StatelessWidget {
         Divider(
           height: 30,
           thickness: 2,
-          color: AppColors.MyYello,
+          color: AppColors.myYello,
           endIndent: endInet,
           //قد ايه من divider عايزه ميبقاش ملون وبتتحسب المسافه من اليمين
         )

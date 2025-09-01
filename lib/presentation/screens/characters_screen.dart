@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_offline/flutter_offline.dart';
-import 'package:omar_ahmed_flutter/Data/Models/Characters_Model.dart';
-import 'package:omar_ahmed_flutter/Logic/character_cubit.dart';
-import 'package:omar_ahmed_flutter/constants/colors.dart';
 
-import '../Widgets/List_Of_Characters.dart';
-import '../Widgets/no_internet.dart';
+import '../../constants/colors.dart';
+import '../../data/models/characters_model.dart';
+import '../../logic/character_cubit.dart';
+import '../widgets/no_internet.dart';
+import '../widgets/list_of_characters.dart';
+
 
 class CharactersScreen extends StatefulWidget {
   const CharactersScreen({super.key});
@@ -17,13 +18,13 @@ class CharactersScreen extends StatefulWidget {
 
 class _CharactersScreenState extends State<CharactersScreen> {
   @override
-  TextEditingController SearchTextController=TextEditingController();
-  bool IsSearch=false;
-  List<Results>SearchCharacters=[];
-  characterModel ?AllCharacters;
+  TextEditingController searchTextController=TextEditingController();
+  bool isSearch=false;
+  List<Results>searchCharacters=[];
+  CharacterModel ?allCharacters;
   void initState(){
     super.initState();
-    BlocProvider.of<CharacterCubit>(context).GetAllCharacters();
+    BlocProvider.of<CharacterCubit>(context).getAllCharacters();
     //السطر اللى فوق ده علشان اعرفه انوا cubit اللى عملته ده هو اللى هستخدمه طول الابلكيشن مش هعمل واحد تانى
   /*
   * هنا هو نادي الداله بس لسه مرجعش المودل لانها داله future فهتاخد وقت
@@ -35,10 +36,10 @@ class _CharactersScreenState extends State<CharactersScreen> {
   }
   //خلينا الداله ترجع list of widget علشان هناديها تحت فى action وهو بياخد list
   List<Widget>ActionIconsOfAppBar(){
-    if(IsSearch==false){
+    if(isSearch==false){
       return [
         IconButton(onPressed: (){
-          IsSearch=true;
+          isSearch=true;
           ModalRoute.of(context)!
               .addLocalHistoryEntry(LocalHistoryEntry(
             onRemove: StopSearch
@@ -53,7 +54,7 @@ class _CharactersScreenState extends State<CharactersScreen> {
           setState(() {
           });
         },
-            icon: Icon(Icons.search,color: AppColors.MyGrey,)
+            icon: Icon(Icons.search,color: AppColors.myGrey,)
         )
       ];
     }
@@ -61,39 +62,39 @@ class _CharactersScreenState extends State<CharactersScreen> {
       return [
         IconButton(onPressed: (){
           setState(() {
-            IsSearch=false;
+            isSearch=false;
             Navigator.pop(context);
-            SearchTextController.clear();
+            searchTextController.clear();
           });
         },
-            icon: Icon(Icons.clear,color: AppColors.MyGrey,)
+            icon: Icon(Icons.clear,color: AppColors.myGrey,)
         )
       ];
     }
   }
 
   void StopSearch(){
-    SearchTextController.clear();
+    searchTextController.clear();
     setState(() {
-     IsSearch=false;
+     isSearch=false;
     });
   }
 
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:IsSearch?SearchTextField():
-        AppBarWithOutSearch(),
-        backgroundColor: AppColors.MyYello,
+        title:isSearch?searchTextField():
+        appBarWithOutSearch(),
+        backgroundColor: AppColors.myYello,
         actions:ActionIconsOfAppBar(),
         leading: Icon(Icons.arrow_back,
-        color: AppColors.MyGrey,
+        color: AppColors.myGrey,
         ),
       ),
       body: BlocBuilder<CharacterCubit,CharacterState>(
           builder:(context,state){
             if(state is CharactersSuccessfully){
-              AllCharacters=(state).characters;
+              allCharacters=state.characters as CharacterModel?;
               //print(SearchTextController.text.isNotEmpty);
               return OfflineBuilder(
                   connectivityBuilder: (
@@ -104,9 +105,9 @@ class _CharactersScreenState extends State<CharactersScreen> {
                     final bool connected = !connectivity.contains(ConnectivityResult.none);
                     if(connected){
                       return   ListOfCharacters(
-                        character: SearchTextController.text.isNotEmpty?
-                        SearchCharacters:
-                        AllCharacters!.results!
+                        character: searchTextController.text.isNotEmpty?
+                        searchCharacters:
+                        allCharacters!.results!
                         ,);
                     }
                     else{
@@ -115,7 +116,7 @@ class _CharactersScreenState extends State<CharactersScreen> {
                   },
                   child: Center(
               child: CircularProgressIndicator(
-              color: AppColors.MyYello,
+              color: AppColors.myYello,
               ),
             ) ,
               );
@@ -123,7 +124,7 @@ class _CharactersScreenState extends State<CharactersScreen> {
             else{
               return Center(
                   child: CircularProgressIndicator(
-                    color: AppColors.MyYello,
+                    color: AppColors.myYello,
                   ),
               );
             }
@@ -132,38 +133,38 @@ class _CharactersScreenState extends State<CharactersScreen> {
     );
   }
 
-  Widget AppBarWithOutSearch(){
+  Widget appBarWithOutSearch(){
     return  Text("Characters",
       style: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,
-          color: AppColors.MyGrey
+          color: AppColors.myGrey
       ),
     );
   }
 
-  Widget SearchTextField(){
+  Widget searchTextField(){
     return TextFormField(
-      controller:SearchTextController,
-      cursorColor: AppColors.MyGrey,
+      controller:searchTextController,
+      cursorColor: AppColors.myGrey,
       decoration: InputDecoration(
         hintText: "Find a Character....",
         hintStyle: TextStyle(
             fontSize: 16,
-            color: AppColors.MyGrey
+            color: AppColors.myGrey
         ),
       ),
       style: TextStyle(
           fontSize: 16,
-          color: AppColors.MyGrey
+          color: AppColors.myGrey
       ),
       onChanged: (searchelement){
-        FilterCharactersBySearchElement(searchelement);
+        filterCharactersBySearchElement(searchelement);
       },
     );
   }
-  void FilterCharactersBySearchElement(String searchelement){
-    SearchCharacters= AllCharacters!.results!.where(
+  void filterCharactersBySearchElement(String searchelement){
+    searchCharacters= allCharacters!.results!.where(
             (character)=>character.name!.toLowerCase()
             .startsWith(searchelement)).toList();
     setState(() {

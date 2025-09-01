@@ -7,8 +7,8 @@ final class CharacterInitial extends CharacterState {}
 
 class CharactersLoading extends CharacterState{}
 class CharactersSuccessfully extends CharacterState{
-  late characterModel characters;
+   CharacterModel? characters;
   CharactersSuccessfully({
-    required this.characters
+     this.characters
 }){}
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:omar_ahmed_flutter/Data/Models/Characters_Model.dart';
 
 import '../../constants/colors.dart';
+import '../../data/models/characters_model.dart';
 import 'character_info_and_divider.dart';
 
 class SliverListItem extends StatelessWidget {
@@ -15,33 +15,33 @@ class SliverListItem extends StatelessWidget {
           [
             Container(
               padding: EdgeInsets.all(14),
-              color: AppColors.MyGrey,
+              color: AppColors.myGrey,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CharacterInfoAndDivider(character: character,
-                  Key: "Name",
+                  keyItem: "Name",
                   endInet:318 ,
                    value: character.location!.name!,
                   ),
                   CharacterInfoAndDivider(character: character,
-                    Key: "Gender",
+                    keyItem: "Gender",
                     endInet:318 ,
                     value: character.gender!,
                   ),
                   CharacterInfoAndDivider(character: character,
-                    Key: "Status",
+                    keyItem: "Status",
                     endInet:318 ,
                     value: character.status!,
                   ),
                   CharacterInfoAndDivider(character: character,
-                    Key: "Number of episode",
+                    keyItem: "Number of episode",
                     endInet:220 ,
                     value: character.episode!.length.toString(),
                   ),
                   CharacterInfoAndDivider(character: character,
-                    Key: "Species",
+                    keyItem: "Species",
                     endInet:318 ,
                     value: character.species!,
                   ),

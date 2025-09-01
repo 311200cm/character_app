@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:omar_ahmed_flutter/Data/Models/Characters_Model.dart';
+
 import 'package:omar_ahmed_flutter/constants/colors.dart';
+
+import '../../data/models/characters_model.dart';
 
 class SliversAppBar extends StatelessWidget {
   Results character;
@@ -9,13 +11,13 @@ class SliversAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      backgroundColor: AppColors.MyGrey,
+      backgroundColor: AppColors.myGrey,
       flexibleSpace: FlexibleSpaceBar(
         title: Text(character.name!,
           style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color:AppColors.MyWhite
+              color:AppColors.myWhite
           ),
         ),
         background: Hero(

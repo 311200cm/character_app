@@ -17,10 +17,10 @@ class NoInternet extends StatelessWidget {
             Text("Can not connected,cheak internet",
             style: TextStyle(
               fontSize: 20,
-              color: AppColors.MyGrey,
+              color: AppColors.myGrey,
             ),
             ),
-            Image.asset(NoInternetConnection),
+            Image.asset(noInternetConnection),
           ],
         ),
       ),

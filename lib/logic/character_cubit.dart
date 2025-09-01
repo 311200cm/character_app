@@ -1,17 +1,16 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:omar_ahmed_flutter/Data/Models/Characters_Model.dart';
-import 'package:omar_ahmed_flutter/Data/Repo/characters_Repo.dart';
-
+import 'package:omar_ahmed_flutter/data/models/characters_model.dart';
+import 'package:omar_ahmed_flutter/data/repo/characters_repo.dart';
 part 'character_state.dart';
 
 class CharacterCubit extends Cubit<CharacterState> {
   late CharactersRepo charactersRepo;
-  late characterModel characters;
+  late CharacterModel characters;
   CharacterCubit(this.charactersRepo) : super(CharacterInitial());
-  void GetAllCharacters(){
+  void getAllCharacters(){
     emit(CharactersLoading());
-    charactersRepo.GetAllModel().then((characters){
+    charactersRepo.getAllModel().then((characters){
       this.characters=characters;
       emit(CharactersSuccessfully(characters: this.characters));
       /*

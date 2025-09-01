@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:omar_ahmed_flutter/Data/Models/Characters_Model.dart';
+
 import 'package:omar_ahmed_flutter/constants/colors.dart';
 
+import '../../data/models/characters_model.dart';
 import 'character_item.dart';
 
 class ListOfCharacters extends StatelessWidget {
@@ -11,7 +12,7 @@ class ListOfCharacters extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppColors.MyGrey,
+      color: AppColors.myGrey,
       child: ShowCharactersOfGridView( character),
     );
   }

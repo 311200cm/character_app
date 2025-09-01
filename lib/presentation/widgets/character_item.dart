@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:omar_ahmed_flutter/Data/Models/Characters_Model.dart';
+
 import 'package:omar_ahmed_flutter/constants/colors.dart';
 import 'package:omar_ahmed_flutter/constants/strings.dart';
+
+import '../../data/models/characters_model.dart';
 
 class CharacterItem extends StatelessWidget {
   Results character;
@@ -15,11 +17,11 @@ class CharacterItem extends StatelessWidget {
       padding: EdgeInsets.all(5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        color: AppColors.MyWhite
+        color: AppColors.myWhite
       ),
       child:InkWell(
         onTap:() {
-          Navigator.pushNamed(context, CharactersDetailsScreenRoute
+          Navigator.pushNamed(context, charactersDetailsScreenRoute
               ,arguments:character );
           //لما كتبت argument واديتله المتغير اللى عندى انا كده باعته للاسكرين
         },
@@ -28,11 +30,11 @@ class CharacterItem extends StatelessWidget {
           tag: character.id!,
           child: GridTile(
               child: character.image!.isNotEmpty?FadeInImage.assetNetwork(
-                  placeholder: LoadingCharacter,
+                  placeholder: loadingCharacter,
                   image: character.image!,
                   width: double.infinity,
                   fit: BoxFit.cover,
-              ):Image.asset(NoCharacterImage),
+              ):Image.asset(noCharacterImage),
               footer:Container(
                 width: double.infinity,
                 height: 50,
@@ -43,7 +45,7 @@ class CharacterItem extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: AppColors.MyWhite
+                    color: AppColors.myWhite
                   ),
                     textAlign: TextAlign.center,
                     overflow: TextOverflow.ellipsis,
